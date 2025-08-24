@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact - Serverless Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Contact Us</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="container">
+    <h2>Get in Touch</h2>
+    <form id="contactForm">
+      <label>Name:</label>
+      <input type="text" id="name" required>
+      
+      <label>Email:</label>
+      <input type="email" id="email" required>
+      
+      <button type="submit">Submit</button>
+    </form>
+    <p id="response"></p>
+  </div>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value
+      };
+      try {
+        const res = await fetch('https://ahee9502xd.execute-api.us-east-1.amazonaws.com/prod/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error("Server error");
+        const json = await res.json();
+        document.getElementById('response').innerText = json.message || "Form submitted successfully!";
+      } catch (err) {
+        document.getElementById('response').innerText = "Error submitting form. Please try again.";
+        console.error("Error submitting form:", err);
+      }
+    });
+  </script>
+</body>
+</html>
+
+
