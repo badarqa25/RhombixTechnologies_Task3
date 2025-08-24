@@ -65,7 +65,6 @@ project-root/
 
 ## 🌐 Live Demo
 - **S3 Website URL**: _(http://my-serverless-website-bucket11.s3-website-us-east-1.amazonaws.com/)_  
-- **API Endpoint**: _(https://ahee9502xd.execute-api.us-east-1.amazonaws.com/prod)_  
 
 ---
 
